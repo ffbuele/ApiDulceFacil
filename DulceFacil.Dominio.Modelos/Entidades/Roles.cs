@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DulceFacil.Infraestructura.AccesoDatos;
 
@@ -24,6 +25,7 @@ public partial class Roles
     public string CreadoPor { get; set; }
 
     public string ModificadoPor { get; set; }
-
+    
+    [JsonIgnore]
     public virtual ICollection<Usuarios> Usuarios { get; set; } = new List<Usuarios>();
 }

@@ -13,10 +13,12 @@ namespace DulceFacil.Aplicacion.ServiciosImpl
     public class UsuariosServicioImpl : IUsuariosServicio
     {
         private IUsuariosRepositorio _usuariosRepositorio;
+        private readonly DulceFacilDBContext _dbContext;
 
         public UsuariosServicioImpl(DulceFacilDBContext dulceFacilDBContext)
         {
-            _usuariosRepositorio = new UsuariosRepositorioImpl(dulceFacilDBContext);
+            _dbContext = dulceFacilDBContext;
+            _usuariosRepositorio = new UsuariosRepositorioImpl(_dbContext);
         }
 
         public async Task AddUsuariosAsync(Usuarios usuario)
