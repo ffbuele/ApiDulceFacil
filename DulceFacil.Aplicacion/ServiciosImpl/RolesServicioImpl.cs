@@ -13,10 +13,12 @@ namespace DulceFacil.Aplicacion.ServiciosImpl
     public class RolesServicioImpl : IRolesServicio
     {
         private IRolesRepositorio _rolesRepositorio;
+        private readonly DulceFacilDBContext _dbContext;
 
         public RolesServicioImpl(DulceFacilDBContext dulceFacilDBContext)
         {
-            _rolesRepositorio = new RolesRepositorioImpl(dulceFacilDBContext);
+            _dbContext = dulceFacilDBContext;
+            _rolesRepositorio = new RolesRepositorioImpl(_dbContext);
         }
 
         public async Task AddRolesAsync(Roles rol)

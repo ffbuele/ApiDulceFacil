@@ -7,11 +7,11 @@ namespace DulceFacil.UI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class RolController : ControllerBase
     {
         private IRolesServicio _rolesServicio;
 
-        public RolesController(IRolesServicio rolesServicio)
+        public RolController(IRolesServicio rolesServicio)
         {
             _rolesServicio = rolesServicio;
         }

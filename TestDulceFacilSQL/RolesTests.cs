@@ -15,7 +15,8 @@ namespace TestDulceFacilSQL
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<DulceFacilDBContext>()
-                .UseSqlServer("Data Source=ffbuele\\MSSQLSERVER01;Initial Catalog=DulceFacilDB;Integrated Security=True;TrustServerCertificate=true;")
+                //.UseSqlServer("Data Source=ffbuele\\MSSQLSERVER01;Initial Catalog=DulceFacilDB;Integrated Security=True;TrustServerCertificate=true;")
+                .UseSqlServer("Server=localhost,1433;Database=DulceFacilDB;User Id=sa;Password=Devffbuele*;TrustServerCertificate=True;")
                 .Options;
 
             _dbContext = new DulceFacilDBContext(options);
@@ -31,7 +32,14 @@ namespace TestDulceFacilSQL
                 Descripcion="Rol administrativo de la aplicación"
             };
 
+            var rol2 = new Roles
+            {
+                Nombre = "Pruebas",
+                Descripcion = "Rol pruebas de la aplicación"
+            };
+
             await _rolesServicio.AddRolesAsync(rol);
+            await _rolesServicio.AddRolesAsync(rol2);
 
             var results = await _rolesServicio.GetAllRolesAsync();
             Console.WriteLine(results.ToList());

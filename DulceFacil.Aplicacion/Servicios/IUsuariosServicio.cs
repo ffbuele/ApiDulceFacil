@@ -1,4 +1,5 @@
-﻿using DulceFacil.Infraestructura.AccesoDatos;
+﻿using DulceFacil.Aplicacion.DTO.DTOs;
+using DulceFacil.Infraestructura.AccesoDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,8 @@ namespace DulceFacil.Aplicacion.Servicios
 
         [OperationContract]
         Task<IEnumerable<Usuarios>> GetAllUsuariosAsync();
+
+        [OperationContract]
+        Task<List<UsuarioDTO>> GetUsuariosRoles();
     }
 }

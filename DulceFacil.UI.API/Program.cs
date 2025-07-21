@@ -11,6 +11,7 @@ var conexionDB = builder.Configuration.GetConnectionString("ConexionSQL");
 builder.Services.AddDbContext<DulceFacilDBContext>(options => options.UseSqlServer(conexionDB));
 // 3. Configuracion de los servicios
 builder.Services.AddScoped<IRolesServicio, RolesServicioImpl>();
+builder.Services.AddScoped<IUsuariosServicio, UsuariosServicioImpl>();
 
 // Add services to the container.
 

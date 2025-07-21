@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DulceFacil.Infraestructura.AccesoDatos;
 
@@ -29,5 +30,6 @@ public partial class Usuarios
 
     public string ModificadoPor { get; set; }
 
+    [JsonIgnore]
     public virtual Roles IdRolNavigation { get; set; }
 }
