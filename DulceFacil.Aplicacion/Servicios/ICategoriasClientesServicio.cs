@@ -15,7 +15,7 @@ namespace DulceFacil.Aplicacion.Servicios
         Task AddCategoriasClientesAsync(CategoriasClientes categoriasClientes);
 
         [OperationContract]
-        Task UpdateCategoriasClientesAsync(CategoriasClientes categoriasClientes);
+        Task<bool> UpdateCategoriasClientesAsync(CategoriasClientes categoriasClientes);
 
         [OperationContract]
         Task DeleteCategoriasClientesAsync(int id);
@@ -25,5 +25,8 @@ namespace DulceFacil.Aplicacion.Servicios
 
         [OperationContract]
         Task<IEnumerable<CategoriasClientes>> GetAllCategoriasClientesAsync();
+        
+        [OperationContract]
+        Task<IEnumerable<CategoriasClientes>> BuscarPorNombres(string nombres);
     }
 }

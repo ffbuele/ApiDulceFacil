@@ -13,15 +13,22 @@ namespace DulceFacil.Aplicacion.ServiciosImpl
     public class ZonasGeograficasServicioImpl : IZonasGeograficasServicio
     {
         private IZonasGeograficasRepositorio _zonasGeograficasRepositorio;
+        private readonly DulceFacilDBContext _dbContext;
 
         public ZonasGeograficasServicioImpl(DulceFacilDBContext dulceFacilDBContext)
         {
-            _zonasGeograficasRepositorio = new ZonasGeograficasRepositorioImpl(dulceFacilDBContext);
+            _dbContext = dulceFacilDBContext;
+            _zonasGeograficasRepositorio = new ZonasGeograficasRepositorioImpl(_dbContext);
         }
 
         public async Task AddZonasGeograficasAsync(ZonasGeograficas zonaGeografica)
         {
             await _zonasGeograficasRepositorio.AddAsync(zonaGeografica);
+        }
+
+        public async Task<IEnumerable<ZonasGeograficas>> ZonasPorNombres(string nombres)
+        {
+            return await _zonasGeograficasRepositorio.ZonasPorNombres(nombres);
         }
 
         public async Task DeleteZonasGeograficasAsync(int id)
@@ -39,9 +46,20 @@ namespace DulceFacil.Aplicacion.ServiciosImpl
             return await _zonasGeograficasRepositorio.GetByIdAsync(id);
         }
 
-        public async Task UpdateZonasGeograficasAsync(ZonasGeograficas zonaGeografica)
+        public async Task<bool> UpdateZonasGeograficasAsync(ZonasGeograficas zonaGeografica)
         {
-            await _zonasGeograficasRepositorio.UpdateAsync(zonaGeografica);
+            var data = await _zonasGeograficasRepositorio.GetByIdAsync(zonaGeografica.IdZonaGeografica);
+            if (data == null)
+                return false;
+
+            data.Nombre = zonaGeografica.Nombre;
+            data.Descripcion = zonaGeografica.Descripcion;
+            data.Coordenadas = zonaGeografica.Coordenadas;
+            data.Estado = zonaGeografica.Estado;
+            data.FechaModificacion = DateTime.UtcNow;
+
+            await _zonasGeograficasRepositorio.UpdateAsync(data);
+            return true;
         }
     }
 }

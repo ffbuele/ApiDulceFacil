@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DulceFacil.Infraestructura.AccesoDatos;
 
@@ -41,9 +42,14 @@ public partial class Clientes
 
     public string ModificadoPor { get; set; }
 
+    [JsonIgnore]
     public virtual CategoriasClientes IdCategoriaClienteNavigation { get; set; }
+    
+    [JsonIgnore]
 
     public virtual ZonasGeograficas IdZonaGeograficaNavigation { get; set; }
+
+    [JsonIgnore]
 
     public virtual ICollection<Pedidos> Pedidos { get; set; } = new List<Pedidos>();
 }

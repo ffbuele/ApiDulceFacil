@@ -1,4 +1,5 @@
-﻿using DulceFacil.Infraestructura.AccesoDatos;
+﻿using DulceFacil.Aplicacion.DTO.DTOs;
+using DulceFacil.Infraestructura.AccesoDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace DulceFacil.Aplicacion.Servicios
     public interface IClientesServicio
     {
         [OperationContract]
-        Task AddClientesAsync(Clientes cliente);
+        Task AddClientesAsync(ClienteDTO cliente);
 
         [OperationContract]
-        Task UpdateClientesAsync(Clientes cliente);
+        Task<bool> UpdateClientesAsync(ClienteDTO cliente);
 
         [OperationContract]
         Task DeleteClientesAsync(int id);
@@ -24,6 +25,9 @@ namespace DulceFacil.Aplicacion.Servicios
         Task<Clientes> GetClientesByIdAsync(int id);
 
         [OperationContract]
-        Task<IEnumerable<Clientes>> GetAllClientesAsync();
+        Task<IEnumerable<ClienteDTO>> GetAllClientesAsync();
+
+        [OperationContract]
+        Task<IEnumerable<ClienteDTO>> BuscarPorNombres(string nombres);
     }
 }

@@ -1,4 +1,5 @@
-﻿using DulceFacil.Infraestructura.AccesoDatos;
+﻿using DulceFacil.Aplicacion.DTO.DTOs;
+using DulceFacil.Infraestructura.AccesoDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DulceFacil.Aplicacion.Servicios
         Task AddZonasGeograficasAsync(ZonasGeograficas zonaGeografica);
 
         [OperationContract]
-        Task UpdateZonasGeograficasAsync(ZonasGeograficas zonaGeografica);
+        Task<bool> UpdateZonasGeograficasAsync(ZonasGeograficas zonaGeografica);
 
         [OperationContract]
         Task DeleteZonasGeograficasAsync(int id);
@@ -25,5 +26,8 @@ namespace DulceFacil.Aplicacion.Servicios
 
         [OperationContract]
         Task<IEnumerable<ZonasGeograficas>> GetAllZonasGeograficasAsync();
+
+        [OperationContract]
+        Task<IEnumerable<ZonasGeograficas>> ZonasPorNombres(string nombres);
     }
 }

@@ -12,6 +12,11 @@ builder.Services.AddDbContext<DulceFacilDBContext>(options => options.UseSqlServ
 // 3. Configuracion de los servicios
 builder.Services.AddScoped<IRolesServicio, RolesServicioImpl>();
 builder.Services.AddScoped<IUsuariosServicio, UsuariosServicioImpl>();
+builder.Services.AddScoped<ICategoriasClientesServicio, CategoriasClientesServicioImpl>();
+builder.Services.AddScoped<ICategoriasProductosServicio, CategoriasProductosServicioImpl>();
+builder.Services.AddScoped<IProductosServicio, ProductosServicioImpl>();
+builder.Services.AddScoped<IZonasGeograficasServicio, ZonasGeograficasServicioImpl>();
+builder.Services.AddScoped<IClientesServicio, ClientesServicioImpl>();
 
 // Add services to the container.
 

@@ -1,4 +1,5 @@
-﻿using DulceFacil.Infraestructura.AccesoDatos;
+﻿using DulceFacil.Aplicacion.DTO.DTOs;
+using DulceFacil.Infraestructura.AccesoDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace DulceFacil.Dominio.Modelos.Abstracciones
 {
     public interface IZonasGeograficasRepositorio : IRepositorio<ZonasGeograficas>
     {
+        public Task<List<ZonasGeograficas>> ZonasPorNombres(string nombres);
+
     }
 }

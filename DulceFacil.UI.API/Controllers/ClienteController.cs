@@ -1,34 +1,34 @@
 ﻿using DulceFacil.Aplicacion.DTO.DTOs;
 using DulceFacil.Aplicacion.Servicios;
 using DulceFacil.Infraestructura.AccesoDatos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DulceFacil.UI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class ClienteController : ControllerBase
     {
-        private IUsuariosServicio _usuariosServicio;
+        private IClientesServicio _clientesServicio;
 
-        public UsuarioController(IUsuariosServicio usuariosServicio)
+        public ClienteController(IClientesServicio clientesServicio)
         {
-            _usuariosServicio = usuariosServicio;
+            _clientesServicio = clientesServicio;
         }
 
-        [HttpGet("GetUsuarios")]
-        public async Task<IEnumerable<UsuarioDTO>> GetUsuarios()
+        [HttpGet("GetClientes")]
+        public async Task<IEnumerable<ClienteDTO>> GetClientes()
         {
-            return await _usuariosServicio.GetUsuariosRoles();
+            return await _clientesServicio.GetAllClientesAsync();
         }
 
-        [HttpPost("CrearUsuario")]
-        public async Task<IActionResult> CrearUsuario([FromBody] Usuarios nuevoUsuario)
+        [HttpPost("CrearCliente")]
+        public async Task<IActionResult> CrearCliente([FromBody] ClienteDTO data)
         {
             try
             {
-                await _usuariosServicio.AddUsuariosAsync(nuevoUsuario);
+                await _clientesServicio.AddClientesAsync(data);
                 return Ok();
             }
             catch (Exception ex)
@@ -38,14 +38,14 @@ namespace DulceFacil.UI.API.Controllers
             }
         }
 
-        [HttpPut("ActualizarUsuario")]
-        public async Task<IActionResult> ActualizarUsuario([FromBody] UsuarioDTO dto)
+        [HttpPut("ActualizarCliente")]
+        public async Task<IActionResult> ActualizarCliente([FromBody] ClienteDTO dto)
         {
             try
             {
-                var actualizado = await _usuariosServicio.UpdateUsuariosAsync(dto);
+                var actualizado = await _clientesServicio.UpdateClientesAsync(dto);
                 if (!actualizado)
-                    return NotFound("Usuario no encontrado");
+                    return NotFound("Cliente no encontrado");
 
                 return Ok();
             }
@@ -56,12 +56,12 @@ namespace DulceFacil.UI.API.Controllers
             }
         }
 
-        [HttpDelete("EliminarUsuario/{idUsuario}")]
-        public async Task<IActionResult> EliminarUsuario(int idUsuario)
+        [HttpDelete("EliminarCliente/{idCliente}")]
+        public async Task<IActionResult> EliminarCliente(int idCliente)
         {
             try
             {
-                await _usuariosServicio.DeleteUsuariosAsync(idUsuario);
+                await _clientesServicio.DeleteClientesAsync(idCliente);
                 return Ok();
             }
             catch (Exception ex)
@@ -72,12 +72,12 @@ namespace DulceFacil.UI.API.Controllers
         }
 
         [HttpGet("BuscarPorNombre")]
-        public async Task<IActionResult> UsuarioPorNombres([FromQuery] string nombres)
+        public async Task<IActionResult> ClientesPorNombres([FromQuery] string nombres)
         {
             try
             {
-                var usuarios = await _usuariosServicio.UsuariosPorNombres(nombres);
-                return Ok(usuarios);
+                var data = await _clientesServicio.BuscarPorNombres(nombres);
+                return Ok(data);
             }
             catch (Exception ex)
             {

@@ -13,10 +13,12 @@ namespace DulceFacil.Aplicacion.ServiciosImpl
     public class CategoriasClientesServicioImpl : ICategoriasClientesServicio
     {
         private ICategoriasClientesRepositorio _categoriasClientesRepositorio;
+        private readonly DulceFacilDBContext _dbContext;
 
         public CategoriasClientesServicioImpl(DulceFacilDBContext dulceFacilDBContext)
         {
-            _categoriasClientesRepositorio = new CategoriasClientesRepositorioImpl(dulceFacilDBContext);
+            _dbContext = dulceFacilDBContext;
+            _categoriasClientesRepositorio = new CategoriasClientesRepositorioImpl(_dbContext);
         }
 
         public async Task AddCategoriasClientesAsync(CategoriasClientes categoriasClientes)
@@ -39,9 +41,23 @@ namespace DulceFacil.Aplicacion.ServiciosImpl
             return await _categoriasClientesRepositorio.GetByIdAsync(id);
         }
 
-        public async Task UpdateCategoriasClientesAsync(CategoriasClientes categoriasClientes)
+        public async Task<bool> UpdateCategoriasClientesAsync(CategoriasClientes categoriasClientes)
         {
-            await _categoriasClientesRepositorio.UpdateAsync(categoriasClientes);
+            var catCliente = await _categoriasClientesRepositorio.GetByIdAsync(categoriasClientes.IdCategoriaCliente);
+            if (catCliente == null)
+                return false;
+
+            catCliente.Nombre = categoriasClientes.Nombre;
+            catCliente.Descripcion = categoriasClientes.Descripcion;
+            catCliente.Estado = categoriasClientes.Estado;
+
+            await _categoriasClientesRepositorio.UpdateAsync(catCliente);
+            return true;
+        }
+
+        public async Task<IEnumerable<CategoriasClientes>> BuscarPorNombres(string nombres)
+        {
+            return await _categoriasClientesRepositorio.BuscarPorNombres(nombres);
         }
     }
 }
