@@ -14,6 +14,6 @@ namespace DulceFacil.Aplicacion.DTO.DTOs
         public string Password { get; set; }
         public string Estado { get; set; }
         public int IdRol { get; set; }
-        public string RolNombre { get; set; }
+        public string? RolNombre { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace DulceFacil.Aplicacion.Servicios
         Task AddUsuariosAsync(Usuarios usuario);
 
         [OperationContract]
-        Task UpdateUsuariosAsync(Usuarios usuario);
+        Task<bool> UpdateUsuariosAsync(UsuarioDTO usuario);
 
         [OperationContract]
         Task DeleteUsuariosAsync(int id);
@@ -29,5 +29,8 @@ namespace DulceFacil.Aplicacion.Servicios
 
         [OperationContract]
         Task<List<UsuarioDTO>> GetUsuariosRoles();
+        
+        [OperationContract]
+        Task<List<UsuarioDTO>> UsuariosPorNombres(string nombres);
     }
 }

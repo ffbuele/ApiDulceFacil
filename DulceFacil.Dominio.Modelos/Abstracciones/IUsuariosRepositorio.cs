@@ -11,5 +11,6 @@ namespace DulceFacil.Dominio.Modelos.Abstracciones
     public interface IUsuariosRepositorio : IRepositorio<Usuarios>
     {
         public Task<List<UsuarioDTO>> GetUsuariosRoles();
+        public Task<List<UsuarioDTO>> UsuariosPorNombres(string nombres);
     }
 }

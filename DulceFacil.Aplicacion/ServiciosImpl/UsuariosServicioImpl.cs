@@ -42,14 +42,31 @@ namespace DulceFacil.Aplicacion.ServiciosImpl
             return await _usuariosRepositorio.GetByIdAsync(id);
         }
 
-        public async Task UpdateUsuariosAsync(Usuarios usuario)
+        public async Task<bool> UpdateUsuariosAsync(UsuarioDTO dto)
         {
+            var usuario = await _usuariosRepositorio.GetByIdAsync(dto.IdUsuario);
+            if (usuario == null)
+                return false;
+
+            usuario.NombreUsuario = dto.NombreUsuario;
+            usuario.Email = dto.Email;
+            usuario.Password = dto.Password;
+            usuario.IdRol = dto.IdRol;
+            usuario.Estado = dto.Estado;
+            usuario.FechaModificacion = DateTime.UtcNow;
+
             await _usuariosRepositorio.UpdateAsync(usuario);
+            return true;
         }
 
         public async Task<List<UsuarioDTO>> GetUsuariosRoles()
         {
             return await _usuariosRepositorio.GetUsuariosRoles();
+        }
+
+        public async Task<List<UsuarioDTO>> UsuariosPorNombres(string nombres)
+        {
+            return await _usuariosRepositorio.UsuariosPorNombres(nombres);
         }
     }
 }
