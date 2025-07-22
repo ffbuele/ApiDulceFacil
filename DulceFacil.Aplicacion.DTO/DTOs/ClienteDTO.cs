@@ -32,7 +32,7 @@ namespace DulceFacil.Aplicacion.DTO.DTOs
         public int? IdZonaGeografica { get; set; }
         public string? NombreZonaGeografica { get; set; }
 
-        public string Estado { get; set; }
+        public string? Estado { get; set; }
 
     }
 }

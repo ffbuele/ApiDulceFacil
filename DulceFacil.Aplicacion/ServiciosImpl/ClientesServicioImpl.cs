@@ -68,6 +68,7 @@ namespace DulceFacil.Aplicacion.ServiciosImpl
             data.Direccion = dto.Direccion;
             data.IdZonaGeografica = dto.IdZonaGeografica;
             data.IdCategoriaCliente = dto.IdCategoriaCliente;
+            data.Estado = dto.Estado;
             data.FechaModificacion = DateTime.UtcNow;
 
             await _clientesRepositorio.UpdateAsync(data);
